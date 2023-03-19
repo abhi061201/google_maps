@@ -39,6 +39,9 @@ dependencies:
   get: ^4.6.5
   google_maps_flutter: ^2.2.5
   truecaller_sdk: ^0.1.2
+  firebase_auth: ^4.3.0
+  firebase: ^9.0.3
+  firebase_core: ^2.8.0
   # flutter_truecaller: ^0.3.1
 
 dev_dependencies:

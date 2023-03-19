@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_maps/modules/auth/controllers/auth_controller.dart';
 import 'package:google_maps/modules/auth/mobile_auth/mobile_auth.dart';
+import 'package:google_maps/modules/auth/view/register_view.dart';
 import 'package:google_maps/modules/home/view/main_home_view.dart';
 import 'package:truecaller_sdk/truecaller_sdk.dart';
 
@@ -37,6 +38,7 @@ class _login_viewState extends State<login_view> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
@@ -126,6 +128,7 @@ class _login_viewState extends State<login_view> {
                                           .profile!.phoneNumber;
 
                                   debugPrint('User data Success');
+                                  // debugPrint(truecallerCallbackData!.profile!.accessToken.toString());
                                   auth_controller.firebaseLogin(profileData);
                                   break;
                                 }
@@ -139,8 +142,8 @@ class _login_viewState extends State<login_view> {
                                 }
                               default:
                                 {
-                                  Get.snackbar('Authentication failed',
-                                      "You have to login first",
+                                  Get.snackbar(
+                                      'Authentication failed', "Try again",
                                       snackPosition: SnackPosition.BOTTOM);
                                   break;
                                 }
@@ -172,6 +175,7 @@ class _login_viewState extends State<login_view> {
                       InkWell(
                         onTap: () {
                           debugPrint('Sign Up is called');
+                          Get.to(Register_view());
                         },
                         child: Container(
                           width: 114,
@@ -196,66 +200,9 @@ class _login_viewState extends State<login_view> {
                     ],
                   ),
                 ),
-                //   ElevatedButton(
-                //     onPressed: () async {
-                //       TruecallerSdk.initializeSDK(
-                //           sdkOptions: TruecallerSdkScope.SDK_OPTION_WITHOUT_OTP);
-                //       // check krne k liye k truecaller install h bhi h ya nhi
-                //       TruecallerSdk.isUsable.then((isUsable) {
-                //         if (isUsable) {
-                //           TruecallerSdk.getProfile;
-                //         } else
-                //           Get.snackbar("Error", "Please install truecaller");
-                //       });
-                //       // stream idhr ek truecaller vali stream ka obj h , isme saara data h
-                //       stream = TruecallerSdk.streamCallbackData
-                //           .listen((truecallerCallbackData) async {
-                //         switch (truecallerCallbackData.result) {
-                //           case TruecallerSdkCallbackResult.success:
-                //             {
-                //               Map<String, dynamic> profileData = {};
-                //               profileData['first name'] =
-                //                   truecallerCallbackData!.profile!.firstName;
-                //               profileData['last name'] =
-                //                   truecallerCallbackData!.profile!.lastName;
-                //               profileData['email'] =
-                //                   truecallerCallbackData!.profile!.email;
-                //               profileData['avatar'] =
-                //                   truecallerCallbackData.profile!.avatarUrl;
-                //               profileData['token'] =
-                //                   truecallerCallbackData!.accessToken;
-                //               profileData['phoneNumber'] =
-                //                   truecallerCallbackData!.profile!.phoneNumber;
-
-                //               debugPrint('User data Success');
-                //               auth_controller.firebaseLogin(profileData);
-                //               break;
-                //             }
-                //           case TruecallerSdkCallbackResult.verification:
-                //             {
-                //               Get.snackbar(
-                //                 'Verification Required',
-                //                 'Your Phone number needs to be verified.',
-                //               );
-                //               Get.to(mobile_auth());
-                //               break;
-                //             }
-                //           default:
-                //             {
-                //               Get.snackbar(
-                //                 'Authentication failed',
-                //                 "Error Code ${truecallerCallbackData.error!.code}",
-                //               );
-                //               break;
-                //             }
-                //         }
-                //       });
-                //     },
-                //     child: Text('Login Truecaller'),
-                //   )
               ]),
         ),
       ),
-    );
+          );
   }
 }
